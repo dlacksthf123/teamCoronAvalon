@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A233DC4244302960054B330 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A233DC3244302960054B330 /* CreateRoomViewController.swift */; };
+		4A233DC6244302A50054B330 /* JoinRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A233DC5244302A50054B330 /* JoinRoomViewController.swift */; };
+		4A3CC6F92442FF7B00C092AF /* StartNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3CC6F82442FF7B00C092AF /* StartNavController.swift */; };
+		4A44F52324475BB800905FA4 /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A44F52224475BB800905FA4 /* LobbyViewController.swift */; };
 		4A7428682442D3C400EB8A5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7428672442D3C400EB8A5D /* AppDelegate.swift */; };
 		4A74286A2442D3C400EB8A5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7428692442D3C400EB8A5D /* SceneDelegate.swift */; };
 		4A74286C2442D3C400EB8A5D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A74286B2442D3C400EB8A5D /* StartViewController.swift */; };
@@ -15,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A233DC3244302960054B330 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
+		4A233DC5244302A50054B330 /* JoinRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewController.swift; sourceTree = "<group>"; };
+		4A3CC6F82442FF7B00C092AF /* StartNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNavController.swift; sourceTree = "<group>"; };
+		4A44F52224475BB800905FA4 /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		4A7428642442D3C400EB8A5D /* coronaValon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coronaValon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A7428672442D3C400EB8A5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A7428692442D3C400EB8A5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +91,11 @@
 		4AEBB9252442D64C00A76CD7 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4A3CC6F82442FF7B00C092AF /* StartNavController.swift */,
 				4A74286B2442D3C400EB8A5D /* StartViewController.swift */,
+				4A233DC3244302960054B330 /* CreateRoomViewController.swift */,
+				4A233DC5244302A50054B330 /* JoinRoomViewController.swift */,
+				4A44F52224475BB800905FA4 /* LobbyViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -161,6 +173,10 @@
 				4A74286C2442D3C400EB8A5D /* StartViewController.swift in Sources */,
 				4A7428682442D3C400EB8A5D /* AppDelegate.swift in Sources */,
 				4A74286A2442D3C400EB8A5D /* SceneDelegate.swift in Sources */,
+				4A3CC6F92442FF7B00C092AF /* StartNavController.swift in Sources */,
+				4A44F52324475BB800905FA4 /* LobbyViewController.swift in Sources */,
+				4A233DC4244302960054B330 /* CreateRoomViewController.swift in Sources */,
+				4A233DC6244302A50054B330 /* JoinRoomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
