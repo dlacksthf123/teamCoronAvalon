@@ -131,37 +131,25 @@ class CreateRoomViewController: UIViewController {
             presentAlertViewController(title: "Error", message: "Make sure to fill out all the required fields")
             return
         }
-        
-        //check if the room code exists
-        db.collection("roomCodes").getDocuments { (docs, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in docs!.documents {
-                    if document.documentID == roomCode {
-                        self.presentAlertViewController(title: "Error", message: "The room code already exists please try a different one")
-                        return
-                    } else {
-                        db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "isLeader": true, "numSucesses": 0, "numFails": 0]) { (error) in
-                            
-                            if error != nil {
-                                //show error message
-                                self.presentAlertViewController(title: "Error", message: "Error creating a room")
-                            } else {
-                                //update info to the game model
-                                //change string num into an int
-                                guard let partNum = Int(participantNum) else { return }
-                                let env = gameEnv(roomCode: roomCode, numPart: partNum, isLeader: true, numSucesses: 0, numFails: 0)
-                                theGame.updateEnv(env: env)
-                                //move to the lobby view
-                                let lobbyViewController = LobbyViewController()
-                                self.navigationController?.pushViewController(lobbyViewController, animated: true)
-                            }
-                        }
-                    }
+        checkRoomCode {
+            db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "isLeader": true, "numSucesses": 0, "numFails": 0]) { (error) in
+                
+                if error != nil {
+                    //show error message
+                    self.presentAlertViewController(title: "Error", message: "Error creating a room")
+                } else {
+                    //update info to the game model
+                    //change string num into an int
+                    guard let partNum = Int(participantNum) else { return }
+                    let env = gameEnv(roomCode: roomCode, numPart: partNum, isLeader: true, numSucesses: 0, numFails: 0)
+                    theGame.updateEnv(env: env)
+                    //move to the lobby view
+                    let lobbyViewController = LobbyViewController()
+                    self.navigationController?.pushViewController(lobbyViewController, animated: true)
                 }
             }
         }
+        
     }
     @objc func doneTapped() {
         self.view.endEditing(true)
@@ -175,6 +163,23 @@ class CreateRoomViewController: UIViewController {
             view.frame.origin.y = -keyboardRect.height
         } else {
             view.frame.origin.y = 0
+        }
+    }
+    
+    func checkRoomCode(completion: @escaping () -> Void) {
+        let roomCode = roomCodeTextField.text!
+        db.collection("roomCodes").getDocuments { (docs, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in docs!.documents {
+                if document.documentID == roomCode {
+                    self.presentAlertViewController(title: "Error", message: "The room code already exists please try a different one")
+                    return
+                }
+            }
+        }
+        completion()
         }
     }
     

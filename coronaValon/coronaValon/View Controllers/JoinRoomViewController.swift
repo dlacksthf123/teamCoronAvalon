@@ -113,11 +113,11 @@ class JoinRoomViewController: UIViewController {
                         theGame.updateEnv(env: env)
                         let lobbyViewController = LobbyViewController()
                         self.navigationController?.pushViewController(lobbyViewController, animated: true)
-                    } else {
-                        self.presentAlertViewController(title: "Error", message: "The room code already exists please try a different one")
                         return
                     }
                 }
+                self.presentAlertViewController(title: "Error", message: "The room code does not exist")
+                return
             }
         }
     }

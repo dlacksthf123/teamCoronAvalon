@@ -7,70 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B1FA49F1-C3C9-422A-BC48-CFD4A410A781"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "coronaValon/View Controllers/CreateRoomViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "createTapped()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B1FA49F1-C3C9-422A-BC48-CFD4A410A781 - 8db6ccb94d7e791c"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "coronaValon.CreateRoomViewController.createTapped() -&gt; ()"
-                  moduleName = "coronaValon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chansollim/Desktop/teamCoronAvalon/coronaValon/coronaValon/View%20Controllers/CreateRoomViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "1423">
-               </Location>
-               <Location
-                  uuid = "B1FA49F1-C3C9-422A-BC48-CFD4A410A781 - 85d12d44e0ab85f"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in coronaValon.CreateRoomViewController.createTapped() -&gt; ()"
-                  moduleName = "coronaValon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chansollim/Desktop/teamCoronAvalon/coronaValon/coronaValon/View%20Controllers/CreateRoomViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "137"
-                  endingLineNumber = "137"
-                  offsetFromSymbolStart = "318">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1042E60E-D11D-41F5-AFB1-72054315D02F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "coronaValon/View Controllers/CreateRoomViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "createTapped()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "687C5B47-3E7B-4691-8740-2E40D2536C4A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -87,96 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "17EC5898-A1AE-4BB4-AE8F-860B09CF1FBC"
-            shouldBeEnabled = "No"
+            uuid = "241635E2-B20A-4E6C-A159-C516212C0551"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "coronaValon/View Controllers/CreateRoomViewController.swift"
+            filePath = "coronaValon/View Controllers/JoinRoomViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "createTapped()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DCC0EA8D-DE88-4823-8137-3458D60677F0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "coronaValon/View Controllers/CreateRoomViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "createTapped()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "DCC0EA8D-DE88-4823-8137-3458D60677F0 - 85d12d44e0ab85f"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in coronaValon.CreateRoomViewController.createTapped() -&gt; ()"
-                  moduleName = "coronaValon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chansollim/Desktop/teamCoronAvalon/coronaValon/coronaValon/View%20Controllers/CreateRoomViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "145"
-                  endingLineNumber = "145"
-                  offsetFromSymbolStart = "1845">
-               </Location>
-               <Location
-                  uuid = "DCC0EA8D-DE88-4823-8137-3458D60677F0 - d771e7a276410d4e"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in coronaValon.CreateRoomViewController.createTapped() -&gt; ()"
-                  moduleName = "coronaValon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chansollim/Desktop/teamCoronAvalon/coronaValon/coronaValon/View%20Controllers/CreateRoomViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "147"
-                  endingLineNumber = "147"
-                  offsetFromSymbolStart = "270">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "10A579F1-4C1C-4C67-A750-2455757E8E54"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "coronaValon/View Controllers/CreateRoomViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "createTapped()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9566BDDC-87BF-4349-B442-5E25B165560E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "coronaValon/View Controllers/CreateRoomViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "createTapped()"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "joinTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
