@@ -90,24 +90,36 @@ class JoinRoomViewController: UIViewController {
     
     @objc func joinTapped() {
         //Validate all the required fields
-
+        let roomCode = roomCodeTextField.text!
         //check if all the fields are either typed or selected
         if roomCodeTextField.text! == "" {
             //error message
             presentAlertViewController(title: "Error", message: "Make sure to fill out all the required fields")
             return
         }
-
-//        //check if the room code exists
-//        if roomCodeTextField.text == "0" {
-//            //if the room exists
-//            presentAlertViewController(title: "Error", message: "The room code already exists")
-//            return
-//        } else {
-            //move to the lobby view
-            let lobbyViewController = LobbyViewController()
-            navigationController?.pushViewController(lobbyViewController, animated: true)
         
+        db.collection("roomCodes").getDocuments { (docs, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in docs!.documents {
+                    if document.documentID == roomCode {
+                        let data = document.data()
+                        let numPart = Int(data["participantNum"] as! String)
+                        let isLeader = data["isLeader"] as! Bool
+                        let numSucesses = data["numSucesses"] as! Int
+                        let numFails = data["numFails"] as! Int
+                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, isLeader: isLeader, numSucesses: numSucesses, numFails: numFails)
+                        theGame.updateEnv(env: env)
+                        let lobbyViewController = LobbyViewController()
+                        self.navigationController?.pushViewController(lobbyViewController, animated: true)
+                    } else {
+                        self.presentAlertViewController(title: "Error", message: "The room code already exists please try a different one")
+                        return
+                    }
+                }
+            }
+        }
     }
     
     @objc func doneTapped() {

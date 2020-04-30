@@ -11,33 +11,42 @@ import UIKit
 import Firebase
 
 var db = Firestore.firestore()
+var theGame = gameModel()
 
 class gameModel {
-    var roomCode: String
-    var numPart: Int
-    var isLeader: Bool
-    var numSucesses = 0
-    var numFails = 0
+//    var roomCode: String
+//    var numPart: Int
+//    var isLeader: Bool
+//    var numSucesses = 0
+//    var numFails = 0
+    var gEnv: gameEnv
     
-    //joining a game
-    init(roomCode: String) {
-        self.roomCode = roomCode
-        //TODO()
-        self.numPart = 0
-        self.isLeader = false
-        
+    init() {
+        self.gEnv = gameEnv(roomCode: "", numPart: 0, isLeader: false, numSucesses: 0, numFails: 0)
     }
     
-    //creating a game
-    init(roomCode: String, numPart: Int, isLeader: Bool) {
-        self.roomCode = roomCode
-        self.numPart = numPart
-        self.isLeader = isLeader
+//    //joining a game
+//    init(roomCode: String) {
+//        self.roomCode = roomCode
+//        //TODO()
+//        self.numPart = 0
+//        self.isLeader = false
+//
+//    }
+//
+//    //creating a game
+//    init(roomCode: String, numPart: Int, isLeader: Bool) {
+//        self.roomCode = roomCode
+//        self.numPart = numPart
+//        self.isLeader = isLeader
+//    }
+    func updateEnv(env: gameEnv) {
+        self.gEnv = env
     }
     
     func startGame()->Bool {
         /* Returns true */
-        if (isLeader) {
+        if (gEnv.isLeader) {
             //for each player in the relevant document, assign a role...
 //            switch (self.numPart) {
 //            case 5:
@@ -56,17 +65,17 @@ class gameModel {
     func playTurn() {
         if (nomination()) {
             if (quest()) {
-                numSucesses += 1
+                gEnv.numSucesses += 1
             } else {
-                numFails += 1
+                gEnv.numFails += 1
             }
-            if (numSucesses == 3) {
+            if (gEnv.numSucesses == 3) {
                 if (guessAnalyst()) {
                     //Viruses win
                 } else {
                     //medical staff win
                 }
-            } else if (numFails == 3) {
+            } else if (gEnv.numFails == 3) {
                 //viruses win
             }
         } else {
@@ -92,10 +101,12 @@ class gameModel {
     }
 }
 
-struct coronAvalon: Decodable {
+struct gameEnv: Decodable {
     var roomCode: String
     var numPart: Int
     var isLeader: Bool
+    var numSucesses: Int
+    var numFails: Int
 }
 
 enum roles {
