@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "9474C94B-4507-4268-A519-547953DD4569"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BBE3A338-DB9D-49C6-8E6C-DB39FC386492"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "coronaValon/View Controllers/StartViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "createRoomButton"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2C829A7D-FA59-46ED-8523-0556288A9058"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "coronaValon/View Controllers/CreateRoomViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "CreateRoomViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "2C829A7D-FA59-46ED-8523-0556288A9058 - 4a8bc223f57f47aa"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "coronaValon.CreateRoomViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; coronaValon.CreateRoomViewController"
+                  moduleName = "coronaValon"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chansollim/Desktop/teamCoronAvalon/coronaValon/coronaValon/View%20Controllers/CreateRoomViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "171">
+               </Location>
+               <Location
+                  uuid = "2C829A7D-FA59-46ED-8523-0556288A9058 - fbcaabe2308781f3"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "coronaValon.CreateRoomViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;coronaValon.CreateRoomViewController&gt;"
+                  moduleName = "coronaValon"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chansollim/Desktop/teamCoronAvalon/coronaValon/coronaValon/View%20Controllers/CreateRoomViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "125">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

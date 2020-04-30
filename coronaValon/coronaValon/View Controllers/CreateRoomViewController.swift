@@ -133,7 +133,7 @@ class CreateRoomViewController: UIViewController {
         }
         
         //check if the room code exists
-        
+        db.collection("roomCodes").child(roomCode).obser
 
         db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "isLeader": true]) { (error) in
             
