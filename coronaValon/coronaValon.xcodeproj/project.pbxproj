@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A233DC4244302960054B330 /* CreateRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A233DC3244302960054B330 /* CreateRoomViewController.swift */; };
 		4A233DC6244302A50054B330 /* JoinRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A233DC5244302A50054B330 /* JoinRoomViewController.swift */; };
+		4A33D9BF244BB56F001D487D /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A33D9BE244BB56F001D487D /* GameModel.swift */; };
 		4A3CC6F92442FF7B00C092AF /* StartNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3CC6F82442FF7B00C092AF /* StartNavController.swift */; };
 		4A44F52324475BB800905FA4 /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A44F52224475BB800905FA4 /* LobbyViewController.swift */; };
 		4A7428682442D3C400EB8A5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7428672442D3C400EB8A5D /* AppDelegate.swift */; };
@@ -16,11 +17,15 @@
 		4A74286C2442D3C400EB8A5D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A74286B2442D3C400EB8A5D /* StartViewController.swift */; };
 		4A7428712442D3C500EB8A5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A7428702442D3C500EB8A5D /* Assets.xcassets */; };
 		4A7428742442D3C500EB8A5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A7428722442D3C500EB8A5D /* LaunchScreen.storyboard */; };
+		4AEB6D67245A68D000425F3A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB6D66245A68D000425F3A /* GoogleService-Info.plist */; };
+		7CB30BB5B3191B0D2102C90B /* Pods_coronaValon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5C746B0DF95EEEEDFDDA23 /* Pods_coronaValon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F5C746B0DF95EEEEDFDDA23 /* Pods_coronaValon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_coronaValon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A233DC3244302960054B330 /* CreateRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewController.swift; sourceTree = "<group>"; };
 		4A233DC5244302A50054B330 /* JoinRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewController.swift; sourceTree = "<group>"; };
+		4A33D9BE244BB56F001D487D /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		4A3CC6F82442FF7B00C092AF /* StartNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNavController.swift; sourceTree = "<group>"; };
 		4A44F52224475BB800905FA4 /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		4A7428642442D3C400EB8A5D /* coronaValon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coronaValon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,6 +35,9 @@
 		4A7428702442D3C500EB8A5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A7428732442D3C500EB8A5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A7428752442D3C500EB8A5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AEB6D66245A68D000425F3A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		80D5426564D20A42F43DABB2 /* Pods-coronaValon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coronaValon.release.xcconfig"; path = "Target Support Files/Pods-coronaValon/Pods-coronaValon.release.xcconfig"; sourceTree = "<group>"; };
+		C8EEA4595647D88C0E37C4A5 /* Pods-coronaValon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coronaValon.debug.xcconfig"; path = "Target Support Files/Pods-coronaValon/Pods-coronaValon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CB30BB5B3191B0D2102C90B /* Pods_coronaValon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +57,8 @@
 			children = (
 				4A7428662442D3C400EB8A5D /* coronaValon */,
 				4A7428652442D3C400EB8A5D /* Products */,
+				7F6B6572EF22D629130FD442 /* Pods */,
+				5CB65F2E47B58D084BC221C5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +81,7 @@
 				4A7428702442D3C500EB8A5D /* Assets.xcassets */,
 				4A7428722442D3C500EB8A5D /* LaunchScreen.storyboard */,
 				4A7428752442D3C500EB8A5D /* Info.plist */,
+				4AEB6D66245A68D000425F3A /* GoogleService-Info.plist */,
 			);
 			path = coronaValon;
 			sourceTree = "<group>";
@@ -84,6 +96,7 @@
 		4AEBB9242442D64A00A76CD7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4A33D9BE244BB56F001D487D /* GameModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -100,6 +113,24 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		5CB65F2E47B58D084BC221C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0F5C746B0DF95EEEEDFDDA23 /* Pods_coronaValon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7F6B6572EF22D629130FD442 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C8EEA4595647D88C0E37C4A5 /* Pods-coronaValon.debug.xcconfig */,
+				80D5426564D20A42F43DABB2 /* Pods-coronaValon.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,9 +138,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A7428782442D3C500EB8A5D /* Build configuration list for PBXNativeTarget "coronaValon" */;
 			buildPhases = (
+				094699403C2933B2E18938C8 /* [CP] Check Pods Manifest.lock */,
 				4A7428602442D3C400EB8A5D /* Sources */,
 				4A7428612442D3C400EB8A5D /* Frameworks */,
 				4A7428622442D3C400EB8A5D /* Resources */,
+				77585E23E54C37D96730515A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -160,10 +193,53 @@
 			files = (
 				4A7428742442D3C500EB8A5D /* LaunchScreen.storyboard in Resources */,
 				4A7428712442D3C500EB8A5D /* Assets.xcassets in Resources */,
+				4AEB6D67245A68D000425F3A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		094699403C2933B2E18938C8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-coronaValon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77585E23E54C37D96730515A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-coronaValon/Pods-coronaValon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-coronaValon/Pods-coronaValon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-coronaValon/Pods-coronaValon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4A7428602442D3C400EB8A5D /* Sources */ = {
@@ -175,6 +251,7 @@
 				4A74286A2442D3C400EB8A5D /* SceneDelegate.swift in Sources */,
 				4A3CC6F92442FF7B00C092AF /* StartNavController.swift in Sources */,
 				4A44F52324475BB800905FA4 /* LobbyViewController.swift in Sources */,
+				4A33D9BF244BB56F001D487D /* GameModel.swift in Sources */,
 				4A233DC4244302960054B330 /* CreateRoomViewController.swift in Sources */,
 				4A233DC6244302A50054B330 /* JoinRoomViewController.swift in Sources */,
 			);
@@ -310,6 +387,7 @@
 		};
 		4A7428792442D3C500EB8A5D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8EEA4595647D88C0E37C4A5 /* Pods-coronaValon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -328,6 +406,7 @@
 		};
 		4A74287A2442D3C500EB8A5D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80D5426564D20A42F43DABB2 /* Pods-coronaValon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

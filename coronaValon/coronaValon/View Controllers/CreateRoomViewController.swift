@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateRoomViewController: UIViewController {
     
@@ -121,26 +122,33 @@ class CreateRoomViewController: UIViewController {
     
     @objc func createTapped() {
         //Validate all the required fields
+        let roomCode = roomCodeTextField.text!
+        let participantNum = participantNumTextField.text!
         
         //check if all the fields are either typed or selected
-        if roomCodeTextField.text! == "" || participantNumTextField.text! == "" {
+        if roomCode == "" || participantNum == "" {
             //error message
             presentAlertViewController(title: "Error", message: "Make sure to fill out all the required fields")
             return
         }
         
         //check if the room code exists
-        if roomCodeTextField.text == "0" {
-            //if the room exists
-            presentAlertViewController(title: "Error", message: "The room code already exists")
-            return
-        } else {
-            //move to the lobby view
-            let lobbyViewController = LobbyViewController()
-            navigationController?.pushViewController(lobbyViewController, animated: true)
+        
+
+        db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "isLeader": true]) { (error) in
+            
+            if error != nil {
+                //show error message
+                self.presentAlertViewController(title: "Error", message: "Error creating a room")
+            } else {
+                //update info to the game model
+                
+                //move to the lobby view
+                let lobbyViewController = LobbyViewController()
+                self.navigationController?.pushViewController(lobbyViewController, animated: true)
+            }
         }
     }
-    
     @objc func doneTapped() {
         self.view.endEditing(true)
     }
@@ -155,6 +163,8 @@ class CreateRoomViewController: UIViewController {
             view.frame.origin.y = 0
         }
     }
+    
+    
     
     func presentAlertViewController(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
