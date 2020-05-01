@@ -45,7 +45,8 @@ class gameModel {
     }
     
     func startGame()->Bool {
-        /* Returns true */
+        /* Assigns the roles of each player in the game.
+         Returns true if the role assignment is successful. */
         if (gEnv.leader == gEnv.player) {
             //for each player in the relevant document, assign a role...
 //            switch (self.numPart) {
@@ -63,6 +64,7 @@ class gameModel {
     }
     
     func playTurn() {
+        /* Go through the stages of a turn if you're the leader */
         if (nomination()) {
             if (quest()) {
                 gEnv.numSucesses += 1
@@ -85,19 +87,30 @@ class gameModel {
     }
     
     func nomination()->Bool {
+        /* The leader gets to choose some players as the nominees.
+         Then, the players will vote on this nomination.
+         Return true if the nomination process was a success, and false if it fails.
+         Update the firebase collection with the correct leader information if */
         return false
     }
     
     func quest()->Bool {
+        /* The chosen team votes on whether a quest succeeds or fails.
+        Return true if the quest was a success, and false if it fails.
+        If there are 7 or more players in the game, and it's the 4th quest
+         then two fail votes are required to fail the quest. Otherwise, only one is needed. */
         return false
     }
     
     func guessAnalyst()->Bool {
+        /* If the healthcare staff reach 3 succeeding quests, then the viruses
+         have one last chance to win the game. If they can guess (vote) on the correct analyst,
+         then they win. */
         return false;
     }
     
     func endGame() {
-        //clean up firebase
+        //clean up firebase after a game ends
     }
 }
 
