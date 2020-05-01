@@ -22,7 +22,7 @@ class gameModel {
     var gEnv: gameEnv
     
     init() {
-        self.gEnv = gameEnv(roomCode: "", numPart: 0, isLeader: false, numSucesses: 0, numFails: 0)
+        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0)
     }
     
 //    //joining a game
@@ -46,7 +46,7 @@ class gameModel {
     
     func startGame()->Bool {
         /* Returns true */
-        if (gEnv.isLeader) {
+        if (gEnv.leader == gEnv.player) {
             //for each player in the relevant document, assign a role...
 //            switch (self.numPart) {
 //            case 5:
@@ -104,9 +104,10 @@ class gameModel {
 struct gameEnv: Decodable {
     var roomCode: String
     var numPart: Int
-    var isLeader: Bool
+    var leader: Int
     var numSucesses: Int
     var numFails: Int
+    var player: Int
 }
 
 enum roles {

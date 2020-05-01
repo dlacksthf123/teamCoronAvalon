@@ -53,6 +53,24 @@ class JoinRoomViewController: UIViewController {
         return textField
     }()
     
+    let nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .yellow
+        textField.placeholder = "Enter your name"
+        
+        textField.textAlignment = .center
+        let bar = UIToolbar()
+        let doneButton = UIBarButtonItem(title:"Done", style: .plain, target: self, action: #selector(doneTapped))
+        doneButton.tintColor = .systemBlue
+        bar.barTintColor = .lightGray
+        bar.items = [doneButton]
+        bar.sizeToFit()
+        textField.inputAccessoryView = bar
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
     let joinButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .yellow
@@ -91,8 +109,9 @@ class JoinRoomViewController: UIViewController {
     @objc func joinTapped() {
         //Validate all the required fields
         let roomCode = roomCodeTextField.text!
+        let name = nameTextField.text!
         //check if all the fields are either typed or selected
-        if roomCodeTextField.text! == "" {
+        if roomCodeTextField.text! == "" || name == "" {
             //error message
             presentAlertViewController(title: "Error", message: "Make sure to fill out all the required fields")
             return
@@ -106,13 +125,25 @@ class JoinRoomViewController: UIViewController {
                     if document.documentID == roomCode {
                         let data = document.data()
                         let numPart = Int(data["participantNum"] as! String)
-                        let isLeader = data["isLeader"] as! Bool
+                        let leader = data["leader"] as! Int
                         let numSucesses = data["numSucesses"] as! Int
                         let numFails = data["numFails"] as! Int
-                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, isLeader: isLeader, numSucesses: numSucesses, numFails: numFails)
+                        var players = data["players"] as! [String]
+                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count)
                         theGame.updateEnv(env: env)
                         let lobbyViewController = LobbyViewController()
                         self.navigationController?.pushViewController(lobbyViewController, animated: true)
+                        
+                        players.append(name)
+                        
+                        db.collection("roomCodes").document(roomCode).setData(["participantNum": data["participantNum"] as! String, "leader": 0, "numSucesses": 0, "numFails": 0, "players": players]) { (error) in
+                            
+                            if error != nil {
+                                //show error message
+                                self.presentAlertViewController(title: "Error", message: "Error adding player. Please try again.")
+                            }
+                        }
+                        
                         return
                     }
                 }
@@ -148,6 +179,7 @@ class JoinRoomViewController: UIViewController {
         view.addSubview(upperContainerView)
         upperContainerView.addSubview(logoLabel)
         upperContainerView.addSubview(roomCodeTextField)
+        upperContainerView.addSubview(nameTextField)
         view.addSubview(lowerContainerView)
         lowerContainerView.addSubview(joinButton)
 
@@ -172,6 +204,10 @@ class JoinRoomViewController: UIViewController {
         roomCodeTextField.widthAnchor.constraint(equalToConstant: 350).isActive = true
         roomCodeTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
+        nameTextField.centerXAnchor.constraint(equalTo: upperContainerView.centerXAnchor, constant: 0).isActive = true
+        nameTextField.topAnchor.constraint(equalTo: roomCodeTextField.bottomAnchor, constant: 20).isActive = true
+        nameTextField.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        nameTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         //lowerContainerView constraints
         lowerContainerView.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 0).isActive = true

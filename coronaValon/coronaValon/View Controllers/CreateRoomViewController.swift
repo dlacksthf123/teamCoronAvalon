@@ -70,6 +70,24 @@ class CreateRoomViewController: UIViewController {
         return textField
     }()
     
+    let nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .yellow
+        textField.placeholder = "Enter your name"
+        
+        textField.textAlignment = .center
+        let bar = UIToolbar()
+        let doneButton = UIBarButtonItem(title:"Done", style: .plain, target: self, action: #selector(doneTapped))
+        doneButton.tintColor = .systemBlue
+        bar.barTintColor = .lightGray
+        bar.items = [doneButton]
+        bar.sizeToFit()
+        textField.inputAccessoryView = bar
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
     let participantNumPickerView: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.backgroundColor = .systemGray
@@ -124,15 +142,16 @@ class CreateRoomViewController: UIViewController {
         //Validate all the required fields
         let roomCode = roomCodeTextField.text!
         let participantNum = participantNumTextField.text!
+        let name = nameTextField.text!
         
         //check if all the fields are either typed or selected
-        if roomCode == "" || participantNum == "" {
+        if roomCode == "" || participantNum == "" || name == "" {
             //error message
             presentAlertViewController(title: "Error", message: "Make sure to fill out all the required fields")
             return
         }
         checkRoomCode {
-            db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "isLeader": true, "numSucesses": 0, "numFails": 0]) { (error) in
+            db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "leader": 0, "numSucesses": 0, "numFails": 0, "players": [name]]) { (error) in
                 
                 if error != nil {
                     //show error message
@@ -141,7 +160,7 @@ class CreateRoomViewController: UIViewController {
                     //update info to the game model
                     //change string num into an int
                     guard let partNum = Int(participantNum) else { return }
-                    let env = gameEnv(roomCode: roomCode, numPart: partNum, isLeader: true, numSucesses: 0, numFails: 0)
+                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0)
                     theGame.updateEnv(env: env)
                     //move to the lobby view
                     let lobbyViewController = LobbyViewController()
@@ -198,6 +217,7 @@ class CreateRoomViewController: UIViewController {
 //        view.addSubview(middleContainerView)
         upperContainerView.addSubview(roomCodeTextField)
         upperContainerView.addSubview(participantNumTextField)
+        upperContainerView.addSubview(nameTextField)
         view.addSubview(lowerContainerView)
         lowerContainerView.addSubview(createButton)
     }
@@ -225,6 +245,11 @@ class CreateRoomViewController: UIViewController {
         participantNumTextField.topAnchor.constraint(equalTo: roomCodeTextField.bottomAnchor, constant: 20).isActive = true
         participantNumTextField.widthAnchor.constraint(equalToConstant: 350).isActive = true
         participantNumTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        nameTextField.centerXAnchor.constraint(equalTo: participantNumTextField.centerXAnchor, constant: 0).isActive = true
+        nameTextField.topAnchor.constraint(equalTo: participantNumTextField.topAnchor, constant: 70).isActive = true
+        nameTextField.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        nameTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         //lowerContainerView constraints
         lowerContainerView.topAnchor.constraint(equalTo: upperContainerView.bottomAnchor, constant: 0).isActive = true
