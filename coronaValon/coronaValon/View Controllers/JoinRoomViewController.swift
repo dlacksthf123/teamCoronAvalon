@@ -150,15 +150,22 @@ class JoinRoomViewController: UIViewController {
                         self.presentAlertViewController(title: "Error", message: "Error adding player. Please try again.")
                     } else {
                         self.listener = db.collection("roomCodes").document(roomCode).addSnapshotListener(includeMetadataChanges: false) { documentSnapshot, error in
-                          guard let document = documentSnapshot else {
-                            print("Error fetching document: \(error!)")
+                            guard let document = documentSnapshot else {
+                                print("Error fetching document: \(error!)")
                             return
-                          }
-                          guard let data = document.data() else {
-                            print("Document data was empty.")
+                            }
+                            guard let data = document.data() else {
+                                print("Document data was empty.")
                             return
-                          }
-                          print("Current data: \(data)")
+                            }
+                            print("Current data from listener: \(data)")
+                            let numPart = Int(data["participantNum"] as! String)
+                            let leader = data["leader"] as! Int
+                            let numSucesses = data["numSucesses"] as! Int
+                            let numFails = data["numFails"] as! Int
+                            var players = data["players"] as! [String]
+                            let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count)
+                            theGame.updateEnv(env: env)
                         }
                     }
                 }

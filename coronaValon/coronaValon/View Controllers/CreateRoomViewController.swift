@@ -165,6 +165,13 @@ class CreateRoomViewController: UIViewController {
                     return
                   }
                   print("Current data: \(data)")
+                    let numPart = Int(data["participantNum"] as! String)
+                    let leader = data["leader"] as! Int
+                    let numSucesses = data["numSucesses"] as! Int
+                    let numFails = data["numFails"] as! Int
+                    var players = data["players"] as! [String]
+                    let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count)
+                    theGame.updateEnv(env: env)
                 }
 
             }
