@@ -205,7 +205,13 @@ class MainGameViewController: UIViewController {
     }()
     let questView1: UIView = {
         var view = UIView()
-        view.backgroundColor = .blue
+        if theGame.gEnv.numSucesses > theGame.gEnv.numFails {
+            view.backgroundColor = .green
+        } else if theGame.gEnv.numSucesses < theGame.gEnv.numFails {
+            view.backgroundColor = .red
+        } else {
+            view.backgroundColor = .blue
+        }
         view.layer.cornerRadius = 50;
         view.layer.masksToBounds = true;
         view.translatesAutoresizingMaskIntoConstraints = false
