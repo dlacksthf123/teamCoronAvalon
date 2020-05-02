@@ -49,16 +49,33 @@ class gameModel {
          Returns true if the role assignment is successful. */
         if (gEnv.leader == gEnv.player) {
             //for each player in the relevant document, assign a role...
-//            switch (self.numPart) {
-//            case 5:
-//            case 6:
-//            case 7:
-//            case 8:
-//            case 9:
-//            case 10:
-//            default:
-//
-//            }
+            var rolelist : [String] = []
+            switch (self.gEnv.numPart) {
+            case 5:
+                rolelist = [roles.virus, roles.virus, roles.analyst, roles.doctor, roles.nurse]
+            case 6:
+                rolelist = [roles.virus, roles.virus, roles.analyst, roles.doctor, roles.nurse, roles.nurse]
+            case 7:
+                rolelist = [roles.virus, roles.virus, roles.analyst, roles.doctor, roles.nurse, roles.nurse, roles.virus]
+            case 8:
+                rolelist = [roles.virus, roles.virus, roles.analyst, roles.doctor, roles.nurse, roles.nurse, roles.virus, roles.doctor]
+            case 9:
+                rolelist = [roles.virus, roles.virus, roles.analyst, roles.doctor, roles.nurse, roles.nurse, roles.virus, roles.doctor, roles.nurse]
+            case 10:
+                rolelist = [roles.virus, roles.virus, roles.analyst, roles.doctor, roles.nurse, roles.nurse, roles.virus, roles.doctor, roles.nurse, roles.virus]
+            default:
+                return false
+            }
+            rolelist.shuffle()
+            var success = true
+            db.collection("roomCodes").document(self.gEnv.roomCode).setData(["roles": rolelist], merge: true) { (error) in
+                if error != nil {
+                    print("failed to initalize roles")
+                    success = false
+                    return
+                }
+            }
+            return success
         }
         return false
     }
