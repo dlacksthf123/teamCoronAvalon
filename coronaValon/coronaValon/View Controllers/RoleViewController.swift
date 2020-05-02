@@ -77,7 +77,7 @@ class RoleViewController: UIViewController {
         case roles.doctor:
             text = "You are a hardworking doctor commited to fighting this pandemic.\n\nYou will help your fellow coworkers kill the virus! "
         case roles.virus:
-            text = "You are a virus commited to continue the pandemic.\n\nYou sabotauge the health workers from killing the virus! "
+            text = "You are a virus commited to prolonging the pandemic.\n\nYou sabotauge the health workers from killing the virus! "
         default:
             text = "You are a hardworking nurse commited to fighting this pandemic.\n\nYou will help your fellow coworkers kill the virus! "
         }
@@ -107,8 +107,8 @@ class RoleViewController: UIViewController {
     }()
     
     @objc func continueButtonTapped() {
-        let roleViewController = RoleViewController()
-        navigationController?.pushViewController(roleViewController, animated: true)
+        let mainGameViewController = MainGameViewController()
+        navigationController?.pushViewController(mainGameViewController, animated: true)
     }
     
     func addingViews() {
