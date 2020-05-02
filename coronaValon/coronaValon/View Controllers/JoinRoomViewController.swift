@@ -129,14 +129,22 @@ class JoinRoomViewController: UIViewController {
                         let numSucesses = data["numSucesses"] as! Int
                         let numFails = data["numFails"] as! Int
                         var players = data["players"] as! [String]
-                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count)
+                        let roles = data["roles"] as! [String]
+                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count, roles: roles)
                         theGame.updateEnv(env: env)
                         let lobbyViewController = LobbyViewController()
                         self.navigationController?.pushViewController(lobbyViewController, animated: true)
                         
+                        //if the room is full, don't join it
+                        
+                        if (players.count == numPart) {
+                            self.presentAlertViewController(title: "Error", message: "Room is full.")
+                            return
+                        }
+                        
                         players.append(name)
                         
-                        db.collection("roomCodes").document(roomCode).setData(["participantNum": data["participantNum"] as! String, "leader": 0, "numSucesses": 0, "numFails": 0, "players": players]) { (error) in
+                        db.collection("roomCodes").document(roomCode).setData(["participantNum": data["participantNum"] as! String, "leader": 0, "numSucesses": 0, "numFails": 0, "players": players, "roles": roles]) { (error) in
                             
                             if error != nil {
                                 //show error message

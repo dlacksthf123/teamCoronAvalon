@@ -22,7 +22,7 @@ class gameModel {
     var gEnv: gameEnv
     
     init() {
-        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0)
+        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: [])
     }
     
 //    //joining a game
@@ -121,6 +121,7 @@ struct gameEnv: Decodable {
     var numSucesses: Int
     var numFails: Int
     var player: Int
+    var roles: [String]
 }
 
 enum roles {

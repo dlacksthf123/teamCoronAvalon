@@ -150,8 +150,15 @@ class CreateRoomViewController: UIViewController {
             presentAlertViewController(title: "Error", message: "Make sure to fill out all the required fields")
             return
         }
+        
+        guard let parts = Int(participantNum) else {return}
+        var roles : [String] = []
+        for _ in 0..<parts {
+            roles.append("")
+        }
+        
         checkRoomCode {
-            db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "leader": 0, "numSucesses": 0, "numFails": 0, "players": [name]]) { (error) in
+            db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "leader": 0, "numSucesses": 0, "numFails": 0, "players": [name], "roles": roles]) { (error) in
                 
                 if error != nil {
                     //show error message
@@ -160,7 +167,7 @@ class CreateRoomViewController: UIViewController {
                     //update info to the game model
                     //change string num into an int
                     guard let partNum = Int(participantNum) else { return }
-                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0)
+                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: roles)
                     theGame.updateEnv(env: env)
                     //move to the lobby view
                     let lobbyViewController = LobbyViewController()
