@@ -22,7 +22,7 @@ class gameModel {
     var gEnv: gameEnv
     
     init() {
-        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: [])
+        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: [], stage: 0)
     }
     
 //    //joining a game
@@ -68,9 +68,18 @@ class gameModel {
             }
             rolelist.shuffle()
             var success = true
-            db.collection("roomCodes").document(self.gEnv.roomCode).setData(["roles": rolelist], merge: true) { (error) in
+            
+            var votes : [Int] = []
+            var eligible : [Int] = []
+            
+            for i in 0..<self.gEnv.numPart {
+                votes.append(-1)
+                eligible.append(i)
+            }
+            
+            db.collection("roomCodes").document(self.gEnv.roomCode).setData(["roles": rolelist, "stage": 0, "eligible": eligible, "nominated": [], "votes": votes], merge: true) { (error) in
                 if error != nil {
-                    print("failed to initalize roles")
+                    print("failed to initalize the game")
                     success = false
                     return
                 }
@@ -139,6 +148,7 @@ struct gameEnv: Decodable {
     var numFails: Int
     var player: Int
     var roles: [String]
+    var stage: Int
 }
 
 enum roles {

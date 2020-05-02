@@ -145,7 +145,7 @@ class JoinRoomViewController: UIViewController {
                         let numFails = data["numFails"] as! Int
                         var players = data["players"] as! [String]
                         let roles = data["roles"] as! [String]
-                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count, roles: roles)
+                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count, roles: roles, stage: 0)
                         theGame.updateEnv(env: env)
                         let lobbyViewController = LobbyViewController()
                         self.navigationController?.pushViewController(lobbyViewController, animated: true)

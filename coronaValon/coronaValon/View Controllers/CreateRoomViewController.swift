@@ -184,7 +184,7 @@ class CreateRoomViewController: UIViewController {
                     //update info to the game model
                     //change string num into an int
                     guard let partNum = Int(participantNum) else { return }
-                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: roles)
+                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: roles, stage: 0)
                     theGame.updateEnv(env: env)
                     //move to the lobby view
                     let lobbyViewController = LobbyViewController()
