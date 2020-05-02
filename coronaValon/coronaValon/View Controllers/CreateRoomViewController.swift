@@ -11,6 +11,8 @@ import Firebase
 
 class CreateRoomViewController: UIViewController {
     
+    var listener : ListenerRegistration?
+    
     let logoImage: UIImageView = {
         var logo = UIImage(named: "logoblack")
         var logoImageView = UIImageView(image: logo)
@@ -169,14 +171,19 @@ class CreateRoomViewController: UIViewController {
         }
         
         guard let parts = Int(participantNum) else {return}
-        var roles : [String] = []
-        for _ in 0..<parts {
-            roles.append("")
-        }
         
         checkRoomCode {
-            db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "leader": 0, "numSucesses": 0, "numFails": 0, "players": [name], "roles": roles]) { (error) in
-                
+            var votes : [Int] = []
+            var eligible : [Int] = []
+            var roles : [String] = []
+            
+            for i in 0..<parts {
+                votes.append(-1)
+                eligible.append(i)
+                roles.append("")
+            }
+            
+            db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "leader": 0, "numSucesses": 0, "numFails": 0, "players": [name], "roles": roles, "stage": 0, "eligible": eligible, "nominated": [], "votes": votes]) { (error) in
                 if error != nil {
                     //show error message
                     self.presentAlertViewController(title: "Error", message: "Error creating a room")
@@ -184,17 +191,23 @@ class CreateRoomViewController: UIViewController {
                     //update info to the game model
                     //change string num into an int
                     guard let partNum = Int(participantNum) else { return }
-                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: roles, stage: 0)
+                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: roles, stage: 0, votes: votes, eligible: eligible)
                     theGame.updateEnv(env: env)
                     //move to the lobby view
                     let lobbyViewController = LobbyViewController()
                     self.navigationController?.pushViewController(lobbyViewController, animated: true)
+                    
+                    self.makeListener(roomCode: roomCode)
+                    
                 }
             }
         }
         
     }
     @objc func doneTapped() {
+        if let listen = listener {
+            listen.remove()
+        }
         self.view.endEditing(true)
     }
     
@@ -207,6 +220,32 @@ class CreateRoomViewController: UIViewController {
         } else {
             view.frame.origin.y = 0
         }
+    }
+    
+    func makeListener(roomCode: String) {
+        self.listener = db.collection("roomCodes").document(roomCode).addSnapshotListener(includeMetadataChanges: false) { documentSnapshot, error in
+            guard let document = documentSnapshot else {
+                print("Error fetching document: \(error!)")
+                return
+            }
+            guard let data = document.data() else {
+                print("Document data was empty.")
+                return
+            }
+            print("Data from listener: \(data)")
+            let numPart = Int(data["participantNum"] as! String)
+            let leader = data["leader"] as! Int
+            let numSucesses = data["numSucesses"] as! Int
+            let numFails = data["numFails"] as! Int
+            let roles = data["roles"] as! [String]
+            let stage = data["stage"] as! Int
+            let eligible = data["eligible"] as! [Int]
+            let votes = data["votes"] as! [Int]
+            let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: theGame.gEnv.player, roles: roles, stage: stage, votes: votes, eligible: eligible)
+            print("player: \(env.player)")
+            theGame.updateEnv(env: env)
+        }
+
     }
     
     func checkRoomCode(completion: @escaping () -> Void) {
