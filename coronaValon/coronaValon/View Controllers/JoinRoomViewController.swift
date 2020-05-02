@@ -117,40 +117,73 @@ class JoinRoomViewController: UIViewController {
             return
         }
         
-        db.collection("roomCodes").getDocuments { (docs, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in docs!.documents {
-                    if document.documentID == roomCode {
-                        let data = document.data()
-                        let numPart = Int(data["participantNum"] as! String)
-                        let leader = data["leader"] as! Int
-                        let numSucesses = data["numSucesses"] as! Int
-                        let numFails = data["numFails"] as! Int
-                        var players = data["players"] as! [String]
-                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count)
-                        theGame.updateEnv(env: env)
-                        let lobbyViewController = LobbyViewController()
-                        self.navigationController?.pushViewController(lobbyViewController, animated: true)
-                        
-                        players.append(name)
-                        
-                        db.collection("roomCodes").document(roomCode).setData(["participantNum": data["participantNum"] as! String, "leader": 0, "numSucesses": 0, "numFails": 0, "players": players]) { (error) in
-                            
-                            if error != nil {
-                                //show error message
-                                self.presentAlertViewController(title: "Error", message: "Error adding player. Please try again.")
-                            }
-                        }
-                        
-                        return
+        checkRoomCode {
+            db.collection("roomCodes").document(roomCode).addSnapshotListener { (documentSnapshot, error) in
+                guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                }
+                print("Current data: \(data)")
+                let numPart = Int(data["participantNum"] as! String)
+                let leader = data["leader"] as! Int
+                let numSucesses = data["numSucesses"] as! Int
+                let numFails = data["numFails"] as! Int
+                var players = data["players"] as! [String]
+                let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count)
+                theGame.updateEnv(env: env)
+                let lobbyViewController = LobbyViewController()
+                self.navigationController?.pushViewController(lobbyViewController, animated: true)
+                
+                players.append(name)
+                
+                db.collection("roomCodes").document(roomCode).setData(["participantNum": data["participantNum"] as! String, "leader": 0, "numSucesses": 0, "numFails": 0, "players": players]) { (error) in
+                    
+                    if error != nil {
+                        //show error message
+                        self.presentAlertViewController(title: "Error", message: "Error adding player. Please try again.")
                     }
                 }
-                self.presentAlertViewController(title: "Error", message: "The room code does not exist")
-                return
             }
         }
+        
+//        db.collection("roomCodes").getDocuments { (docs, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in docs!.documents {
+//                    if document.documentID == roomCode {
+//                        let data = document.data()
+//                        let numPart = Int(data["participantNum"] as! String)
+//                        let leader = data["leader"] as! Int
+//                        let numSucesses = data["numSucesses"] as! Int
+//                        let numFails = data["numFails"] as! Int
+//                        var players = data["players"] as! [String]
+//                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count)
+//                        theGame.updateEnv(env: env)
+//                        let lobbyViewController = LobbyViewController()
+//                        self.navigationController?.pushViewController(lobbyViewController, animated: true)
+//
+//                        players.append(name)
+//
+//                        db.collection("roomCodes").document(roomCode).setData(["participantNum": data["participantNum"] as! String, "leader": 0, "numSucesses": 0, "numFails": 0, "players": players]) { (error) in
+//
+//                            if error != nil {
+//                                //show error message
+//                                self.presentAlertViewController(title: "Error", message: "Error adding player. Please try again.")
+//                            }
+//                        }
+//
+//                        return
+//                    }
+//                }
+//                self.presentAlertViewController(title: "Error", message: "The room code does not exist")
+//                return
+//            }
+//        }
     }
     
     @objc func doneTapped() {
@@ -165,6 +198,29 @@ class JoinRoomViewController: UIViewController {
             view.frame.origin.y = -keyboardRect.height
         } else {
             view.frame.origin.y = 0
+        }
+    }
+    
+    func checkRoomCode(completion: @escaping () -> Void) {
+        let roomCode = roomCodeTextField.text!
+        var isRoomCode = false
+        db.collection("roomCodes").getDocuments { (docs, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in docs!.documents {
+                if document.documentID == roomCode {
+                    isRoomCode = true
+                }
+            }
+            if isRoomCode {
+                completion()
+                return
+            } else {
+                self.presentAlertViewController(title: "Error", message: "The room code already exists please try a different one")
+                return
+            }
+        }
         }
     }
     

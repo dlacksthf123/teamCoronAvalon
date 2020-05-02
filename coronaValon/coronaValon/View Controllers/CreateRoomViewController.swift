@@ -11,6 +11,8 @@ import Firebase
 
 class CreateRoomViewController: UIViewController {
     
+    var completionHandlers: [() -> Void] = []
+    
     let logoLabel: UILabel = {
         let label = UILabel()
         label.text = "CoronAvalon"
@@ -151,21 +153,19 @@ class CreateRoomViewController: UIViewController {
             return
         }
         checkRoomCode {
-            db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "leader": 0, "numSucesses": 0, "numFails": 0, "players": [name]]) { (error) in
-                
-                if error != nil {
-                    //show error message
-                    self.presentAlertViewController(title: "Error", message: "Error creating a room")
-                } else {
-                    //update info to the game model
-                    //change string num into an int
-                    guard let partNum = Int(participantNum) else { return }
-                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0)
-                    theGame.updateEnv(env: env)
-                    //move to the lobby view
-                    let lobbyViewController = LobbyViewController()
-                    self.navigationController?.pushViewController(lobbyViewController, animated: true)
+            self.updateFirebase {
+                db.collection("roomCodes").document(roomCode).addSnapshotListener(includeMetadataChanges: true) { documentSnapshot, error in
+                  guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                  }
+                  guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                  }
+                  print("Current data: \(data)")
                 }
+
             }
         }
         
@@ -182,6 +182,30 @@ class CreateRoomViewController: UIViewController {
             view.frame.origin.y = -keyboardRect.height
         } else {
             view.frame.origin.y = 0
+        }
+    }
+    func updateFirebase(completion: @escaping () -> Void) {
+        //Validate all the required fields
+        let roomCode = roomCodeTextField.text!
+        let participantNum = participantNumTextField.text!
+        let name = nameTextField.text!
+        
+        db.collection("roomCodes").document(roomCode).setData(["participantNum": participantNum, "leader": 0, "numSucesses": 0, "numFails": 0, "players": [name]]) { (error) in
+            
+            if error != nil {
+                //show error message
+                self.presentAlertViewController(title: "Error", message: "Error creating a room")
+            } else {
+                //update info to the game model
+                //change string num into an int
+                guard let partNum = Int(participantNum) else { return }
+                let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0)
+                theGame.updateEnv(env: env)
+                //move to the lobby view
+                let lobbyViewController = LobbyViewController()
+                self.navigationController?.pushViewController(lobbyViewController, animated: true)
+            }
+            completion()
         }
     }
     
