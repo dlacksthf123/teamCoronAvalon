@@ -26,7 +26,7 @@ class QuestResultsViewController: UIViewController {
     
     let instructions: UILabel = {
         let label = UILabel()
-        var text = "Failed"
+        var text = "is a success"
         label.text = "The Quest " + text
         label.font = UIFont.systemFont(ofSize: 25)
         label.textAlignment = .center
@@ -37,10 +37,28 @@ class QuestResultsViewController: UIViewController {
         return label
     }()
     
+    let voteButton: UIButton = {
+        var button = UIButton()
+        button.backgroundColor = .blue
+        button.setTitle("Next", for: .normal)
+        button.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 30)
+    
+        button.addTarget(self, action: #selector(startGameButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 15;
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc func startGameButtonTapped() {
+        let mainGame = MainGameViewController()
+        navigationController?.pushViewController(mainGame, animated: true)
+    }
+    
     func addingViews() {
         view.addSubview(backgroundImage)
         view.addSubview(instructions)
-        //        view.addSubview(successLabel)
+        view.addSubview(voteButton)
         //        view.addSubview(failLabel)
         //        view.addSubview(failButton)
         //        view.addSubview(successButton)
@@ -59,5 +77,11 @@ class QuestResultsViewController: UIViewController {
         instructions.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         instructions.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.1).isActive = true
         instructions.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
+        
+        
+        voteButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
+        voteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        voteButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        voteButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
     }
 }
