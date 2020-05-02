@@ -56,11 +56,12 @@ class StartViewController: UIViewController {
         button.layer.cornerRadius = 15
         button.setTitle("Join Room", for: .normal)
         button.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 30)
-
+        
         button.addTarget(self, action: #selector(joinRoomButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
     
     let upperContainerView: UIView = {
         let view = UIView()
