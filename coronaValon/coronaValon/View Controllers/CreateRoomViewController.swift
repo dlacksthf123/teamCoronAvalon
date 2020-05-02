@@ -241,8 +241,8 @@ class CreateRoomViewController: UIViewController {
             let stage = data["stage"] as! Int
             let eligible = data["eligible"] as! [Int]
             let votes = data["votes"] as! [Int]
-            let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: theGame.gEnv.player, roles: roles, stage: stage, votes: votes, eligible: eligible)
-            print("player: \(env.player)")
+            let nominated = data["nominated"] as! [Int]
+            let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: theGame.gEnv.player, roles: roles, stage: stage, votes: votes, eligible: eligible, nominated: nominated)
             theGame.updateEnv(env: env)
         }
 
