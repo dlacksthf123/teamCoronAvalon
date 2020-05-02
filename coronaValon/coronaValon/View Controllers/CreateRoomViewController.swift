@@ -191,7 +191,7 @@ class CreateRoomViewController: UIViewController {
                     //update info to the game model
                     //change string num into an int
                     guard let partNum = Int(participantNum) else { return }
-                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: roles, stage: 0, votes: votes, eligible: eligible, nominated: [])
+                    let env = gameEnv(roomCode: roomCode, numPart: partNum, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: roles, stage: 0, votes: votes, eligible: eligible, nominated: [], players: [name])
                     theGame.updateEnv(env: env)
                     //move to the lobby view
                     let lobbyViewController = LobbyViewController()
@@ -242,7 +242,8 @@ class CreateRoomViewController: UIViewController {
             let eligible = data["eligible"] as! [Int]
             let votes = data["votes"] as! [Int]
             let nominated = data["nominated"] as! [Int]
-            let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: theGame.gEnv.player, roles: roles, stage: stage, votes: votes, eligible: eligible, nominated: nominated)
+            let players = data["players"] as! [String]
+            let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: theGame.gEnv.player, roles: roles, stage: stage, votes: votes, eligible: eligible, nominated: nominated, players: players)
             theGame.updateEnv(env: env)
         }
 

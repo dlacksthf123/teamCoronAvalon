@@ -37,7 +37,7 @@ class FirstVoteViewController: UIViewController {
     }()
     
     @objc func approvedButtonTapped() {
-        let resultsViewController = ResultsViewController()
+        let resultsViewController = QuestResultsViewController()
 
         navigationController?.pushViewController(resultsViewController, animated: true)
     }
@@ -52,7 +52,7 @@ class FirstVoteViewController: UIViewController {
     }()
     
         @objc func deniedButtonTapped() {
-            let resultsViewController = ResultsViewController()
+            let resultsViewController = QuestResultsViewController()
             
             navigationController?.pushViewController(resultsViewController, animated: true)
         }

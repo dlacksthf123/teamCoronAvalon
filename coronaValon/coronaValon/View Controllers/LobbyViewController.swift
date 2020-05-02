@@ -46,6 +46,23 @@ class LobbyViewController: UIViewController {
             return background
         }()
     
+//
+//    let names: UILabel = {
+//        let label = UILabel()
+//        var text = theGame.gEnv.players.joined(separator: "\n")
+//        print("hello!")
+//        print(theGame.gEnv.players)
+//        print(text)
+//        label.text = text
+//        label.font = UIFont.systemFont(ofSize: 16)
+//        label.textAlignment = .left
+//        label.contentMode = .scaleAspectFit
+//        label.textColor = .black
+//        label.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.7)
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        return label
+//    }()
+//
     let startGameButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 0.34, green: 0.65, blue: 1.00, alpha: 1.00)
@@ -98,6 +115,12 @@ class LobbyViewController: UIViewController {
          logoImage.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 0).isActive = true
          logoImage.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: 0).isActive = true
          logoImage.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor, multiplier: 0.75).isActive = true
+//
+//        //playername constraints
+//        names.topAnchor.constraint(equalTo: logoImage.topAnchor, constant: 0).isActive = true
+//        names.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 0).isActive = true
+//        names.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: 0).isActive = true
+//        names.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor, multiplier: 0.75).isActive = true
 
          
          //background constraints
@@ -123,6 +146,7 @@ class LobbyViewController: UIViewController {
          view.addSubview(backgroundImage)
          view.addSubview(upperContainerView)
          upperContainerView.addSubview(logoImage)
+//        upperContainerView.addSubview(names)
         
         view.addSubview(lowerContainerView)
         lowerContainerView.addSubview(startGameButton)

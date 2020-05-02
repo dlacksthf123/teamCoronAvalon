@@ -22,7 +22,7 @@ class gameModel {
     var gEnv: gameEnv
     
     init() {
-        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: [], stage: 0, votes: [], eligible: [], nominated: [])
+        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: [], stage: 0, votes: [], eligible: [], nominated: [], players: [])
     }
     
 //    //joining a game
@@ -47,7 +47,7 @@ class gameModel {
     func startGame()->Bool {
         /* Assigns the roles of each player in the game.
          Returns true if the role assignment is successful. */
-        if (gEnv.leader == gEnv.player) {
+        if (gEnv.leader == gEnv.player && gEnv.numPart == gEnv.players.count) {
             //for each player in the relevant document, assign a role...
             var rolelist : [String] = []
             switch (self.gEnv.numPart) {
@@ -255,7 +255,13 @@ class gameModel {
             }
         }
         
-        db.collection("roomCodes").document(gEnv.roomCode).setData(["stage": 6, "numSucesses": gEnv.numSucesses, "numFails": 4], merge: true) { (error) in
+        if virusWin {
+            gEnv.numFails = 4
+        } else {
+            gEnv.numSucesses = 4
+        }
+        
+        db.collection("roomCodes").document(gEnv.roomCode).setData(["stage": 6, "numSucesses": gEnv.numSucesses, "numFails": gEnv.numFails], merge: true) { (error) in
             if error != nil {
                 print("error in advancing to stage 6 (viruses win)")
             }
@@ -265,7 +271,7 @@ class gameModel {
     
     func endGame() {
         db.collection("roomCodes").document(gEnv.roomCode).delete()
-        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: [], stage: 0, votes: [], eligible: [], nominated: [])
+        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: [], stage: 0, votes: [], eligible: [], nominated: [], players: [gEnv.players[gEnv.player]])
     }
 }
 
@@ -281,6 +287,7 @@ struct gameEnv: Decodable {
     var votes: [Int]
     var eligible: [Int]
     var nominated: [Int]
+    var players: [String]
 }
 
 enum roles {

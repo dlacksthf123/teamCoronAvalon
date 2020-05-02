@@ -48,7 +48,7 @@ class QuestViewController: UIViewController {
     }()
     
     @objc func approvedButtonTapped() {
-        let resultsViewController = ResultsViewController()
+        let resultsViewController = QuestResultsViewController()
 
         navigationController?.pushViewController(resultsViewController, animated: true)
     }
@@ -76,7 +76,7 @@ class QuestViewController: UIViewController {
     }()
     
         @objc func deniedButtonTapped() {
-            let resultsViewController = ResultsViewController()
+            let resultsViewController = QuestResultsViewController()
             
             navigationController?.pushViewController(resultsViewController, animated: true)
         }

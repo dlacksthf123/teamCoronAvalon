@@ -151,8 +151,7 @@ class JoinRoomViewController: UIViewController {
                         let stage = data["stage"] as! Int
                         let eligible = data["eligible"] as! [Int]
                         let votes = data["votes"] as! [Int]
-                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count, roles: roles, stage: stage, votes: votes, eligible: eligible, nominated: [])
-                        theGame.updateEnv(env: env)
+                        
                         let lobbyViewController = LobbyViewController()
                         self.navigationController?.pushViewController(lobbyViewController, animated: true)
                         
@@ -164,6 +163,9 @@ class JoinRoomViewController: UIViewController {
                         }
                         
                         players.append(name)
+                        
+                        let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: players.count, roles: roles, stage: stage, votes: votes, eligible: eligible, nominated: [], players: players)
+                        theGame.updateEnv(env: env)
                         
                         db.collection("roomCodes").document(roomCode).setData(["players": players], merge: true) { (error) in
                             
@@ -222,7 +224,8 @@ class JoinRoomViewController: UIViewController {
             let eligible = data["eligible"] as! [Int]
             let votes = data["votes"] as! [Int]
             let nominated = data["nominated"] as! [Int]
-            let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: theGame.gEnv.player, roles: roles, stage: stage, votes: votes, eligible: eligible, nominated: nominated)
+            let players = data["players"] as! [String]
+            let env = gameEnv(roomCode: roomCode, numPart: numPart!, leader: leader, numSucesses: numSucesses, numFails: numFails, player: theGame.gEnv.player, roles: roles, stage: stage, votes: votes, eligible: eligible, nominated: nominated, players: players)
             theGame.updateEnv(env: env)
         }
 

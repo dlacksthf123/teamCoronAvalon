@@ -14,7 +14,7 @@ class MainGameViewController: UIViewController {
     
     let name1: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
+        label.text = theGame.gEnv.players[0]
         label.textAlignment = .center
         label.textColor = .white
         label.font = label.font.withSize(20)
@@ -24,7 +24,7 @@ class MainGameViewController: UIViewController {
     
     let name2: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
+        label.text = theGame.gEnv.players[1]
 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -32,7 +32,7 @@ class MainGameViewController: UIViewController {
     
     let name3: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
+        label.text = theGame.gEnv.players[2]
 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -40,7 +40,7 @@ class MainGameViewController: UIViewController {
     
     let name4: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
+        label.text = theGame.gEnv.players[3]
 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -48,7 +48,7 @@ class MainGameViewController: UIViewController {
     
     let name5: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
+        label.text = theGame.gEnv.players[4]
 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -56,15 +56,18 @@ class MainGameViewController: UIViewController {
     
     let name6: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
-
+        if theGame.gEnv.numPart >= 6 {
+            label.text = theGame.gEnv.players[5]
+        }
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let name7: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
+        if theGame.gEnv.numPart >= 7 {
+            label.text = theGame.gEnv.players[6]
+        }
 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -72,7 +75,9 @@ class MainGameViewController: UIViewController {
     
     let name8: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
+        if theGame.gEnv.numPart >= 8 {
+            label.text = theGame.gEnv.players[7]
+        }
 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -80,7 +85,9 @@ class MainGameViewController: UIViewController {
     
     let name9: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
+        if theGame.gEnv.numPart >= 9 {
+            label.text = theGame.gEnv.players[8]
+        }
 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -88,7 +95,9 @@ class MainGameViewController: UIViewController {
     
     let name10: UILabel = {
         var label = UILabel()
-        label.text = "Chansolsssssssssssssssssssssss"
+        if theGame.gEnv.numPart >= 10 {
+            label.text = theGame.gEnv.players[9]
+        }
 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
