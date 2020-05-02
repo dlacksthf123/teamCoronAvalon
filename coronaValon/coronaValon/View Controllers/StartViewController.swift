@@ -57,17 +57,17 @@ class StartViewController: UIViewController {
         button.setTitle("Join Room", for: .normal)
         button.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 30)
         
-//        button.addTarget(self, action: #selector(joinRoomButtonTapped), for: .touchUpInside)
-        button.addTarget(self, action: #selector(questButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(joinRoomButtonTapped), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(questButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    @objc func questButtonTapped() {
-        let questVoteViewController = QuestViewController()
-        
-        navigationController?.pushViewController(questVoteViewController, animated: true)
-    }
+//    @objc func questButtonTapped() {
+//        let questVoteViewController = QuestViewController()
+//
+//        navigationController?.pushViewController(questVoteViewController, animated: true)
+//    }
     
     
     
