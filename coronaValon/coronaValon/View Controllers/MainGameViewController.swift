@@ -363,6 +363,24 @@ class MainGameViewController: UIViewController {
         return stackView
     }()
     
+    let voteButton: UIButton = {
+        var button = UIButton()
+        button.backgroundColor = .blue
+        button.setTitle("Vote", for: .normal)
+        button.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 30)
+    
+        button.addTarget(self, action: #selector(startGameButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 15;
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc func startGameButtonTapped() {
+        let voteViewController = FirstVoteViewController()
+        navigationController?.pushViewController(voteViewController, animated: true)
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -385,6 +403,7 @@ class MainGameViewController: UIViewController {
         view.addSubview(questStackViewContainerView)
         view.addSubview(topViewContainerView)
         view.addSubview(bottomViewContainerView)
+        view.addSubview(voteButton)
         questStackViewContainerView.addSubview(questStackView)
         questStackView.addArrangedSubview(questView1)
         questStackView.addArrangedSubview(questView2)
@@ -408,6 +427,7 @@ class MainGameViewController: UIViewController {
         questView5.addSubview(questLabel5)
         questView5.addSubview(questNumLabel5)
 
+        
         //5 players
         switch numPart {
         case 5:
@@ -628,7 +648,10 @@ class MainGameViewController: UIViewController {
         questNumLabel5.heightAnchor.constraint(equalToConstant: 70).isActive = true
 
         
-        
+        voteButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
+        voteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        voteButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        voteButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         
         switch numPart {
         case 5:

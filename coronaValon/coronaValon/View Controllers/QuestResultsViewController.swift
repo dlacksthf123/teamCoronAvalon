@@ -26,7 +26,8 @@ class QuestResultsViewController: UIViewController {
     
     let instructions: UILabel = {
         let label = UILabel()
-        label.text = "You arrive at the grocery store."
+        var text = "Failed"
+        label.text = "The Quest " + text
         label.font = UIFont.systemFont(ofSize: 25)
         label.textAlignment = .center
         label.contentMode = .scaleAspectFit
