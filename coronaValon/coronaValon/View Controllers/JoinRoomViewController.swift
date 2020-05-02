@@ -10,35 +10,48 @@ import UIKit
 
 class JoinRoomViewController: UIViewController {
         
-    let logoLabel: UILabel = {
-        let label = UILabel()
-        label.text = "CoronAvalon"
-        label.font = UIFont.systemFont(ofSize: 70)
-        label.textAlignment = .center
-        label.contentMode = .scaleAspectFit
-        label.textColor = .yellow
-        label.backgroundColor = .blue
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+        let logoImage: UIImageView = {
+            var logo = UIImage(named: "logoblack")
+            var logoImageView = UIImageView(image: logo)
+            logoImageView.contentMode = .scaleAspectFill
+            logoImageView.translatesAutoresizingMaskIntoConstraints = false
+            return logoImageView
+        }()
+        
+        let backgroundImage: UIImageView = {
+            var tiles = UIImage(named: "tiles")
+            var background = UIImageView(image: tiles)
+            background.contentMode = .scaleAspectFill
+            background.translatesAutoresizingMaskIntoConstraints = false
+            return background
+        }()
+        
+        let virusImage: UIImageView = {
+            var virus = UIImage(named: "blackvirus")
+            var virusImageView = UIImageView(image: virus)
+            virusImageView.contentMode = .scaleAspectFill
+            virusImageView.translatesAutoresizingMaskIntoConstraints = false
+    //        virusImageView.backgroundColor = .black
+            return virusImageView
+        }()
     
     let upperContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .green
+        view.backgroundColor = .none
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let lowerContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .none
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let roomCodeTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .yellow
+        textField.backgroundColor = UIColor(red: 0.34, green: 0.65, blue: 1.00, alpha: 1.00)
         textField.placeholder = "Type a room code here"
         textField.textAlignment = .center
         let bar = UIToolbar()
@@ -55,7 +68,7 @@ class JoinRoomViewController: UIViewController {
     
     let nameTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .yellow
+        textField.backgroundColor = UIColor(red: 0.34, green: 0.65, blue: 1.00, alpha: 1.00)
         textField.placeholder = "Enter your name"
         
         textField.textAlignment = .center
@@ -73,13 +86,15 @@ class JoinRoomViewController: UIViewController {
     
     let joinButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .yellow
-        button.setTitle("Join", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel!.textColor = .black
-        button.addTarget(self, action: #selector(joinTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+         button.backgroundColor = UIColor(red: 0.34, green: 0.65, blue: 1.00, alpha: 1.00)
+         button.setTitle("Join", for: .normal)
+         button.setTitleColor(.white, for: .normal)
+         button.titleLabel!.textColor = .white
+         button.addTarget(self, action: #selector(joinTapped), for: .touchUpInside)
+         button.translatesAutoresizingMaskIntoConstraints = false
+         button.layer.cornerRadius = 15
+         button.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 30)
+         return button
     }()
     
 
@@ -183,12 +198,15 @@ class JoinRoomViewController: UIViewController {
     }
     
 
-    func addingViews() {
+   func addingViews() {
+        view.addSubview(backgroundImage)
         view.addSubview(upperContainerView)
-        upperContainerView.addSubview(logoLabel)
+        upperContainerView.addSubview(logoImage)
+        
         upperContainerView.addSubview(roomCodeTextField)
         upperContainerView.addSubview(nameTextField)
         view.addSubview(lowerContainerView)
+        lowerContainerView.addSubview(virusImage)
         lowerContainerView.addSubview(joinButton)
 
     }
@@ -201,11 +219,19 @@ class JoinRoomViewController: UIViewController {
         upperContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         upperContainerView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.66).isActive = true
         
-        //logoLabel constraints
-        logoLabel.topAnchor.constraint(equalTo: upperContainerView.topAnchor, constant: 0).isActive = true
-        logoLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 0).isActive = true
-        logoLabel.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: 0).isActive = true
-        logoLabel.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor, multiplier: 0.33).isActive = true
+        
+        //logoImage constraints
+        logoImage.topAnchor.constraint(equalTo: upperContainerView.topAnchor, constant: 0).isActive = true
+        logoImage.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 0).isActive = true
+        logoImage.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: 0).isActive = true
+        logoImage.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor, multiplier: 0.75).isActive = true
+
+        
+        //background constraints
+        backgroundImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        backgroundImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        backgroundImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        backgroundImage.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1).isActive = true
         
         roomCodeTextField.centerXAnchor.constraint(equalTo: upperContainerView.centerXAnchor, constant: 0).isActive = true
         roomCodeTextField.bottomAnchor.constraint(equalTo: upperContainerView.centerYAnchor, constant: view.safeAreaLayoutGuide.layoutFrame.height * (2/27)-15).isActive = true
@@ -227,6 +253,11 @@ class JoinRoomViewController: UIViewController {
         joinButton.centerYAnchor.constraint(equalTo: lowerContainerView.centerYAnchor, constant: 0).isActive = true
         joinButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         joinButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        virusImage.topAnchor.constraint(equalTo: lowerContainerView.centerYAnchor, constant: -100).isActive = true
+        virusImage.leftAnchor.constraint(equalTo: lowerContainerView.centerXAnchor, constant: -50).isActive = true
+        virusImage.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        virusImage.widthAnchor.constraint(equalToConstant: 400).isActive = true
                
     }
 

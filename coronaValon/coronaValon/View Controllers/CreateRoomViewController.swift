@@ -11,37 +11,50 @@ import Firebase
 
 class CreateRoomViewController: UIViewController {
     
-    let logoLabel: UILabel = {
-        let label = UILabel()
-        label.text = "CoronAvalon"
-        label.font = UIFont.systemFont(ofSize: 70)
-        label.textAlignment = .center
-        label.contentMode = .scaleAspectFit
-        label.textColor = .yellow
-        label.backgroundColor = .blue
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let logoImage: UIImageView = {
+        var logo = UIImage(named: "logoblack")
+        var logoImageView = UIImageView(image: logo)
+        logoImageView.contentMode = .scaleAspectFill
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        return logoImageView
+    }()
+    
+    let backgroundImage: UIImageView = {
+        var tiles = UIImage(named: "tiles")
+        var background = UIImageView(image: tiles)
+        background.contentMode = .scaleAspectFill
+        background.translatesAutoresizingMaskIntoConstraints = false
+        return background
+    }()
+    
+    let virusImage: UIImageView = {
+        var virus = UIImage(named: "blackvirus")
+        var virusImageView = UIImageView(image: virus)
+        virusImageView.contentMode = .scaleAspectFill
+        virusImageView.translatesAutoresizingMaskIntoConstraints = false
+        //        virusImageView.backgroundColor = .black
+        return virusImageView
     }()
     
     let upperContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .green
+        view.backgroundColor = .none
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let lowerContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .none
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let roomCodeTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .yellow
+        textField.backgroundColor = UIColor(red: 0.34, green: 0.65, blue: 1.00, alpha: 1.00)
         textField.placeholder = "Type and create a room code here"
-       
+        
         textField.textAlignment = .center
         let bar = UIToolbar()
         let doneButton = UIBarButtonItem(title:"Done", style: .plain, target: self, action: #selector(doneTapped))
@@ -57,8 +70,8 @@ class CreateRoomViewController: UIViewController {
     
     let participantNumTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .yellow
-        
+        textField.backgroundColor = UIColor(red: 0.34, green: 0.65, blue: 1.00, alpha: 1.00)
+
         let bar = UIToolbar()
         let doneButton = UIBarButtonItem(title:"Done", style: .plain, target: self, action: #selector(doneTapped))
         doneButton.tintColor = .systemBlue
@@ -72,7 +85,7 @@ class CreateRoomViewController: UIViewController {
     
     let nameTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .yellow
+        textField.backgroundColor = UIColor(red: 0.34, green: 0.65, blue: 1.00, alpha: 1.00)
         textField.placeholder = "Enter your name"
         
         textField.textAlignment = .center
@@ -83,7 +96,7 @@ class CreateRoomViewController: UIViewController {
         bar.items = [doneButton]
         bar.sizeToFit()
         textField.inputAccessoryView = bar
-        
+        textField.textColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -97,23 +110,27 @@ class CreateRoomViewController: UIViewController {
     
     let createButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .yellow
-        button.setTitle("create", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel!.textColor = .black
+        button.backgroundColor = UIColor(red: 0.34, green: 0.65, blue: 1.00, alpha: 1.00)
+        button.setTitle("Create", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel!.textColor = .white
+        
         button.addTarget(self, action: #selector(createTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 15
+        button.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 30)
+
         return button
     }()
     
     let pickerData = ["5", "6", "7", "8", "9", "10"]
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-//        view.backgroundColor = .green
+        //        view.backgroundColor = .green
         title = "Create a Room"
         addingViews()
         addingConstraints()
@@ -195,17 +212,17 @@ class CreateRoomViewController: UIViewController {
     func checkRoomCode(completion: @escaping () -> Void) {
         let roomCode = roomCodeTextField.text!
         db.collection("roomCodes").getDocuments { (docs, err) in
-        if let err = err {
-            print("Error getting documents: \(err)")
-        } else {
-            for document in docs!.documents {
-                if document.documentID == roomCode {
-                    self.presentAlertViewController(title: "Error", message: "The room code already exists please try a different one")
-                    return
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in docs!.documents {
+                    if document.documentID == roomCode {
+                        self.presentAlertViewController(title: "Error", message: "The room code already exists please try a different one")
+                        return
+                    }
                 }
             }
-        }
-        completion()
+            completion()
         }
     }
     
@@ -217,31 +234,43 @@ class CreateRoomViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-
+    
     func addingViews() {
+        view.addSubview(backgroundImage)
         view.addSubview(upperContainerView)
-        upperContainerView.addSubview(logoLabel)
-//        view.addSubview(middleContainerView)
+        upperContainerView.addSubview(logoImage)
+        
         upperContainerView.addSubview(roomCodeTextField)
         upperContainerView.addSubview(participantNumTextField)
         upperContainerView.addSubview(nameTextField)
         view.addSubview(lowerContainerView)
+        lowerContainerView.addSubview(virusImage)
         lowerContainerView.addSubview(createButton)
     }
     
     func addingConstraints() {
         
-        //upperContainerView constraints
+       //upperContainerView constraints
         upperContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         upperContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
         upperContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         upperContainerView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.66).isActive = true
         
-        //logoLabel constraints
-        logoLabel.topAnchor.constraint(equalTo: upperContainerView.topAnchor, constant: 0).isActive = true
-        logoLabel.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 0).isActive = true
-        logoLabel.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: 0).isActive = true
-        logoLabel.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor, multiplier: 0.33).isActive = true
+        //logoImage constraints
+        logoImage.topAnchor.constraint(equalTo: upperContainerView.topAnchor, constant: 0).isActive = true
+        logoImage.leadingAnchor.constraint(equalTo: upperContainerView.leadingAnchor, constant: 0).isActive = true
+        logoImage.trailingAnchor.constraint(equalTo: upperContainerView.trailingAnchor, constant: 0).isActive = true
+        logoImage.heightAnchor.constraint(equalTo: upperContainerView.heightAnchor, multiplier: 0.75).isActive = true
+
+        
+        //background constraints
+        backgroundImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        backgroundImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        backgroundImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        backgroundImage.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1).isActive = true
+        
+        
+        
         
         roomCodeTextField.centerXAnchor.constraint(equalTo: upperContainerView.centerXAnchor, constant: 0).isActive = true
         roomCodeTextField.bottomAnchor.constraint(equalTo: upperContainerView.centerYAnchor, constant: view.safeAreaLayoutGuide.layoutFrame.height * (2/27)-15).isActive = true
@@ -268,9 +297,14 @@ class CreateRoomViewController: UIViewController {
         createButton.centerYAnchor.constraint(equalTo: lowerContainerView.centerYAnchor, constant: 0).isActive = true
         createButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         createButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
-               
+            
+        //virusImage constraints
+        virusImage.topAnchor.constraint(equalTo: lowerContainerView.centerYAnchor, constant: -100).isActive = true
+        virusImage.leftAnchor.constraint(equalTo: lowerContainerView.centerXAnchor, constant: -50).isActive = true
+        virusImage.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        virusImage.widthAnchor.constraint(equalToConstant: 400).isActive = true
     }
-
+    
 }
 
 extension CreateRoomViewController: UIPickerViewDelegate, UIPickerViewDataSource {
