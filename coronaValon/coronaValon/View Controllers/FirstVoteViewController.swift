@@ -77,12 +77,6 @@ class FirstVoteViewController: UIViewController {
         view.addSubview(denyButton)
         view.addSubview(instructions)
         
-//        view.addSubview(continueButton)
-        //        view.addSubview(upperContainerView)
-        //        upperContainerView.addSubview(logoImage)
-        
-        //       view.addSubview(lowerContainerView)
-        //       lowerContainerView.addSubview(startGameButton)
         
     }
     
