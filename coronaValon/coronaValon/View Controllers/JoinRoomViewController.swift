@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class JoinRoomViewController: UIViewController {
-        
+    
+    var listener: ListenerRegistration?
+    
     let logoLabel: UILabel = {
         let label = UILabel()
         label.text = "CoronAvalon"
@@ -118,7 +121,7 @@ class JoinRoomViewController: UIViewController {
         }
         
         checkRoomCode {
-            db.collection("roomCodes").document(roomCode).addSnapshotListener { (documentSnapshot, error) in
+            db.collection("roomCodes").document(roomCode).getDocument { (documentSnapshot, error) in
                 guard let document = documentSnapshot else {
                     print("Error fetching document: \(error!)")
                     return
@@ -145,6 +148,18 @@ class JoinRoomViewController: UIViewController {
                     if error != nil {
                         //show error message
                         self.presentAlertViewController(title: "Error", message: "Error adding player. Please try again.")
+                    } else {
+                        self.listener = db.collection("roomCodes").document(roomCode).addSnapshotListener(includeMetadataChanges: false) { documentSnapshot, error in
+                          guard let document = documentSnapshot else {
+                            print("Error fetching document: \(error!)")
+                            return
+                          }
+                          guard let data = document.data() else {
+                            print("Document data was empty.")
+                            return
+                          }
+                          print("Current data: \(data)")
+                        }
                     }
                 }
             }
@@ -187,6 +202,9 @@ class JoinRoomViewController: UIViewController {
     }
     
     @objc func doneTapped() {
+        if let listen = self.listener {
+            listen.remove()
+        }
         self.view.endEditing(true)
     }
     

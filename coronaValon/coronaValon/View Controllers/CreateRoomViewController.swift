@@ -12,6 +12,7 @@ import Firebase
 class CreateRoomViewController: UIViewController {
     
     var completionHandlers: [() -> Void] = []
+    var listener: ListenerRegistration?
     
     let logoLabel: UILabel = {
         let label = UILabel()
@@ -154,7 +155,7 @@ class CreateRoomViewController: UIViewController {
         }
         checkRoomCode {
             self.updateFirebase {
-                db.collection("roomCodes").document(roomCode).addSnapshotListener(includeMetadataChanges: true) { documentSnapshot, error in
+                self.listener = db.collection("roomCodes").document(roomCode).addSnapshotListener(includeMetadataChanges: false) { documentSnapshot, error in
                   guard let document = documentSnapshot else {
                     print("Error fetching document: \(error!)")
                     return
@@ -171,6 +172,9 @@ class CreateRoomViewController: UIViewController {
         
     }
     @objc func doneTapped() {
+        if let listen = listener {
+            listen.remove()
+        }
         self.view.endEditing(true)
     }
     
