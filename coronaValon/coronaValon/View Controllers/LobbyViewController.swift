@@ -61,8 +61,14 @@ class LobbyViewController: UIViewController {
     }()
     
     @objc func startGameButtonTapped() {
-        let roleViewController = RoleViewController()
-        navigationController?.pushViewController(roleViewController, animated: true)
+        if theGame.startGame() {
+            let roleViewController = RoleViewController()
+            navigationController?.pushViewController(roleViewController, animated: true)
+        } else {
+            let alertController = UIAlertController(title: title, message: "Role initialization failed.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alertController, animated: true, completion: nil)
+        }
     }
      
      let upperContainerView: UIView = {
