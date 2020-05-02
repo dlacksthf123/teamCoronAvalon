@@ -84,6 +84,7 @@ class gameModel {
                     return
                 }
             }
+            gEnv.roles = rolelist
             return success
         }
         return false
