@@ -29,6 +29,16 @@ class RoleViewController: UIViewController {
     
     let characterImage: UIImageView = {
         var person = UIImage(named: "nurse_man")
+        switch theGame.gEnv.roles[theGame.gEnv.player] {
+        case roles.analyst:
+            person = UIImage(named: "analyst_woman")
+        case roles.doctor:
+            person = UIImage(named: "surgeon")
+        case roles.virus:
+            person = UIImage(named: "blackvirus")
+        default:
+            person = UIImage(named: "nurse_man")
+        }
         var personIV = UIImageView(image: person)
         personIV.contentMode = .scaleAspectFill
         personIV.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +48,16 @@ class RoleViewController: UIViewController {
     let roleLabel: UILabel = {
         let label = UILabel()
         var text = "Your Role: "
-        text = text + "Nurse"
+        switch theGame.gEnv.roles[theGame.gEnv.player] {
+        case roles.analyst:
+            text = text + "Analyst"
+        case roles.doctor:
+            text = text + "Doctor"
+        case roles.virus:
+            text = text + "Virus"
+        default:
+            text = text + "Nurse"
+        }
         label.text = text
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textAlignment = .center
@@ -51,7 +70,17 @@ class RoleViewController: UIViewController {
     
     let roleDescription: UITextView = {
         let label = UITextView()
-        var text = "You are a hardworking nurse commited to fighting this pandemic.\n\nYou will help your fellow coworkers kill the virus! "
+        var text = ""
+        switch theGame.gEnv.roles[theGame.gEnv.player] {
+        case roles.analyst:
+            text = "You are a hardworking analyst who knows where the viruses are.\n\nYou will help your fellow coworkers kill the virus! "
+        case roles.doctor:
+            text = "You are a hardworking doctor commited to fighting this pandemic.\n\nYou will help your fellow coworkers kill the virus! "
+        case roles.virus:
+            text = "You are a virus commited to continue the pandemic.\n\nYou sabotauge the health workers from killing the virus! "
+        default:
+            text = "You are a hardworking nurse commited to fighting this pandemic.\n\nYou will help your fellow coworkers kill the virus! "
+        }
         label.text = text
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left

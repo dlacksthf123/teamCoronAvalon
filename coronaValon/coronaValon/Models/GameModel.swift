@@ -264,7 +264,8 @@ class gameModel {
     }
     
     func endGame() {
-        //clean up firebase after a game ends
+        db.collection("roomCodes").document(gEnv.roomCode).delete()
+        self.gEnv = gameEnv(roomCode: "", numPart: 0, leader: 0, numSucesses: 0, numFails: 0, player: 0, roles: [], stage: 0, votes: [], eligible: [], nominated: [])
     }
 }
 
