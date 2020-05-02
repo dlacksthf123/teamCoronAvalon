@@ -58,10 +58,16 @@ class StartViewController: UIViewController {
         button.titleLabel?.font =  UIFont.boldSystemFont(ofSize: 30)
         
         button.addTarget(self, action: #selector(joinRoomButtonTapped), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(firstVoteButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+//    @objc func firstVoteButtonTapped() {
+//        let firstVoteViewController = FirstVoteViewController()
+//        
+//        navigationController?.pushViewController(firstVoteViewController, animated: true)
+//    }
     
     let upperContainerView: UIView = {
         let view = UIView()
@@ -138,10 +144,10 @@ class StartViewController: UIViewController {
     func addingConstraints() {
             //upperContainerView constraints
          upperContainerView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-         upperContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+         upperContainerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
          upperContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
          upperContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-         upperContainerView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1).isActive = true
+         upperContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
 
          //logoImage constraints
          logoImage.topAnchor.constraint(equalTo: upperContainerView.topAnchor, constant: 0).isActive = true
